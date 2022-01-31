@@ -95,9 +95,12 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
         "verifico che la condizione funzioni p.toLocaleLowerCase().indexOf(filter) === 0",
         "Bulba".toLocaleLowerCase().indexOf(pokeFilter) === 0
       );
-      const newFilterPokemon = copyFilterPokemon.filter(
-        (p) => p.toLocaleLowerCase().indexOf(pokeFilter) === 0
-      );
+      const newFilterPokemon = copyFilterPokemon.filter((p) => {
+        console.log("analizzo p", p);
+        return (
+          p.toLocaleLowerCase().indexOf(pokeFilter.toLocaleLowerCase()) === 0
+        );
+      });
       setListFilterPokemon(newFilterPokemon);
     } else {
       setShowFilterPokemon(false);
