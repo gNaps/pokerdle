@@ -84,20 +84,19 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
 
   console.log(pokemon);
 
-  const filterPokemon = (filter: string) => {
-    setFilter(filter);
-    if (filter.length >= 2) {
+  const filterPokemon = (pokeFilter: string) => {
+    setFilter(pokeFilter);
+    if (pokeFilter.length >= 2) {
       setShowFilterPokemon(true);
       const copyFilterPokemon = [...pokemons];
       console.log("creo il copyFilterPokemon", copyFilterPokemon);
-      console.log("cerco il pokemon che inizia con", filter);
+      console.log("cerco il pokemon che inizia con", pokeFilter);
       console.log(
         "verifico che la condizione funzioni p.toLocaleLowerCase().indexOf(filter) === 0",
-        "Bulba".toLocaleLowerCase().indexOf("bu") === 0
+        "Bulba".toLocaleLowerCase().indexOf(pokeFilter) === 0
       );
-      console.log("ma quanto vale filter ??", "bu" === filter);
       const newFilterPokemon = copyFilterPokemon.filter(
-        (p) => p.toLocaleLowerCase().indexOf(filter) === 0
+        (p) => p.toLocaleLowerCase().indexOf(pokeFilter) === 0
       );
       setListFilterPokemon(newFilterPokemon);
     } else {
