@@ -8,11 +8,13 @@ import styles from "../styles/Home.module.css";
 import { RiSendPlaneFill, RiShareFill } from "react-icons/ri";
 import { pokemons } from "../utils/pokemons";
 import {
+  firstLetterCapitalize,
   getGenerationById,
   getHomeImage,
   getNumberPokedex,
   getPixelImage,
   getResult,
+  getTextResult,
   randomIntFromInterval,
 } from "../utils/utils";
 import {
@@ -88,9 +90,9 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
     if (pokeFilter.length >= 2) {
       setShowFilterPokemon(true);
       const copyFilterPokemon = [...pokemons];
-      const newFilterPokemon = copyFilterPokemon.filter((p) => {
-        p.toLocaleLowerCase().indexOf(pokeFilter.toLocaleLowerCase()) === 0;
-      });
+      const newFilterPokemon = copyFilterPokemon.filter((p) =>
+        p.toLowerCase().startsWith(pokeFilter.toLowerCase())
+      );
       setListFilterPokemon(newFilterPokemon);
     } else {
       setShowFilterPokemon(false);
@@ -153,18 +155,21 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
   };
 
   const shareResult = () => {
+    const text = getTextResult(pokemonsResult);
     if (navigator.share) {
       navigator
         .share({
-          title: "WebShare API Demo",
-          url: "https://codepen.io/ayoisaiah/pen/YbNazJ",
+          title: "Pokerdle",
+          url: "https://pokerdle.vercel.app/",
+          text: "",
         })
         .then(() => {
           console.log("Thanks for sharing!");
         })
         .catch(console.error);
     } else {
-      console.log("non funge");
+      console.log("non disponibile", text);
+      alert("Condivisione solo su mobile");
     }
   };
 
@@ -210,7 +215,9 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
                 key={pokemon.id + attempts}
               >
                 <div className="flex flex-col">
-                  <h3 className="text-xl">{pokemon.name}</h3>
+                  <h3 className="text-xl">
+                    {firstLetterCapitalize(pokemon.name)}
+                  </h3>
                   <div className="flex items-center">
                     <Image
                       src={getHomeImage(pokemon.name)}
@@ -230,7 +237,7 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
                       <li className="flex justify-between">
                         <p>
                           <span className="font-medium">First type: </span>
-                          {pokemon.firstType}
+                          {firstLetterCapitalize(pokemon.firstType)}
                         </p>
                         {result.firstType && <p>🟩</p>}
                         {!result.firstType && <p>🟥</p>}
@@ -254,7 +261,7 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
                       <li className="flex justify-between">
                         <p>
                           <span className="font-medium">First letter: </span>
-                          {pokemon.name.substring(0, 1)}
+                          {pokemon.name.substring(0, 1).toUpperCase()}
                         </p>
                         {result.firstLetter && <p>🟩</p>}
                         {!result.firstLetter && <p>🟥</p>}

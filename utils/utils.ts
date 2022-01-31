@@ -1,5 +1,10 @@
 import { RiEmotionUnhappyLine } from "react-icons/ri";
-import { PokemonChoosen, PokemonToGuess, Result } from "../models/models";
+import {
+  PokemonChoosen,
+  PokemonResult,
+  PokemonToGuess,
+  Result,
+} from "../models/models";
 import { pokemons } from "./pokemons";
 
 export const randomIntFromInterval = (min: number, max: number) => {
@@ -58,4 +63,24 @@ export const getResult = (
 
   console.log("Result", result);
   return result;
+};
+
+export const getTextResult = (result: PokemonResult[]) => {
+  let resultText = "";
+  result.forEach((r) => {
+    resultText += r.result.generation ? "🟩" : "🟥";
+    resultText += r.result.firstType ? "🟩" : "🟥";
+    resultText += r.result.secondType ? "🟩" : "🟥";
+    resultText += r.result.evoChain ? "🟩" : "🟥";
+    resultText += r.result.firstLetter ? "🟩" : "🟥";
+    resultText += "\n";
+  });
+
+  return resultText;
+};
+
+export const firstLetterCapitalize = (name: string) => {
+  return (
+    name.substring(0, 1).toUpperCase() + name.substring(1, name.length)
+  );
 };
