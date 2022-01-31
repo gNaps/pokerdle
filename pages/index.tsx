@@ -87,9 +87,9 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
     setFilter(filter);
     if (filter.length >= 2) {
       setShowFilterPokemon(true);
-      const copyFilterPokemon = [...pokemons];
-      const newFilterPokemon = copyFilterPokemon.filter(
-        (p) => p.toLowerCase().indexOf(filter) === 0
+      //const copyFilterPokemon = [...pokemons];
+      const newFilterPokemon = pokemons.filter((p) =>
+        p.toLowerCase().indexOf(filter) === 0
       );
       setListFilterPokemon(newFilterPokemon);
     } else {
