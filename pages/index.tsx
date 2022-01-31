@@ -91,6 +91,7 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
       const newFilterPokemon = pokemons.filter((p) =>
         p.toLowerCase().startsWith(filter)
       );
+      console.log("array filtrato", newFilterPokemon);
       setListFilterPokemon(newFilterPokemon);
     } else {
       setShowFilterPokemon(false);
