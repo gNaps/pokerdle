@@ -89,7 +89,7 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
       setShowFilterPokemon(true);
       //const copyFilterPokemon = [...pokemons];
       const newFilterPokemon = pokemons.filter((p) =>
-        p.toLowerCase().indexOf(filter) === 0
+        p.toLocaleLowerCase().indexOf(filter) === 0
       );
       setListFilterPokemon(newFilterPokemon);
     } else {
