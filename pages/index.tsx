@@ -93,8 +93,9 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
       console.log("cerco il pokemon che inizia con", filter);
       console.log(
         "verifico che la condizione funzioni p.toLocaleLowerCase().indexOf(filter) === 0",
-        "Bulba".toLocaleLowerCase().indexOf(filter) === 0
+        "Bulba".toLocaleLowerCase().indexOf("bu") === 0
       );
+      console.log("ma quanto vale filter ??", "bu" === filter);
       const newFilterPokemon = copyFilterPokemon.filter(
         (p) => p.toLocaleLowerCase().indexOf(filter) === 0
       );
