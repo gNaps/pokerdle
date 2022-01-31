@@ -95,6 +95,9 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
     } else {
       setShowFilterPokemon(false);
     }
+
+    console.log("mostra filtro??", showFilterPokemon);
+    console.log("filtro attivo", listFilterPokemon);
   };
 
   const selectPokemon = async (p: string) => {
