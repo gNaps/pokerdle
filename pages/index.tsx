@@ -23,8 +23,7 @@ import {
 } from "../models/models";
 
 export const getStaticProps: GetStaticProps = async (context) => {
-  //const randomNumber = randomIntFromInterval(1, 898);
-  const randomNumber = 1;
+  const randomNumber = randomIntFromInterval(1, 898);
   const pokemon_res = await axios.get(
     "https://pokeapi.co/api/v2/pokemon/" + randomNumber
   );
@@ -89,25 +88,13 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
     if (pokeFilter.length >= 2) {
       setShowFilterPokemon(true);
       const copyFilterPokemon = [...pokemons];
-      console.log("creo il copyFilterPokemon", copyFilterPokemon);
-      console.log("cerco il pokemon che inizia con", pokeFilter);
-      console.log(
-        "verifico che la condizione funzioni p.toLocaleLowerCase().indexOf(filter) === 0",
-        "Bulba".toLocaleLowerCase().indexOf(pokeFilter) === 0
-      );
       const newFilterPokemon = copyFilterPokemon.filter((p) => {
-        console.log("analizzo p", p);
-        return (
-          p.toLocaleLowerCase().indexOf(pokeFilter.toLocaleLowerCase()) === 0
-        );
+        p.toLocaleLowerCase().indexOf(pokeFilter.toLocaleLowerCase()) === 0;
       });
       setListFilterPokemon(newFilterPokemon);
     } else {
       setShowFilterPokemon(false);
     }
-
-    console.log("filtro visibile??", showFilterPokemon);
-    console.log("lista filtri disponibili", listFilterPokemon);
   };
 
   const selectPokemon = async (p: string) => {
