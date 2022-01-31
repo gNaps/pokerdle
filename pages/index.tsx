@@ -89,7 +89,7 @@ const Home: NextPage<HomeProps> = ({ pokemon }) => {
       setShowFilterPokemon(true);
       //const copyFilterPokemon = [...pokemons];
       const newFilterPokemon = pokemons.filter((p) =>
-        p.toLowerCase().startsWith(filter)
+        p.toLowerCase().indexOf(filter) === 0
       );
       console.log("array filtrato", newFilterPokemon);
       setListFilterPokemon(newFilterPokemon);
