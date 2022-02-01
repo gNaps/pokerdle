@@ -179,16 +179,16 @@ const Hard = () => {
               </button>
             </>
           )}
-          {win && attempts < 6 && (
+          {win && attempts <= 6 && (
             <>
               <p>You won!</p>
-              {/* <button
+              <button
                 className="bg-violet-500 px-3 py-3 rounded-md 
             hover:bg-violet-700 active:bg-violet-700 text-slate-50 ml-2"
                 onClick={() => window.location.reload()}
               >
                 Play again
-              </button> */}
+              </button>
               <button
                 className="bg-violet-500 px-3 py-3 rounded-md 
             hover:bg-violet-700 active:bg-violet-700 text-slate-50 ml-2"
@@ -198,7 +198,7 @@ const Hard = () => {
               </button>
             </>
           )}
-          {!win && attempts >= 6 && (
+          {!win && attempts > 6 && (
             <>
               <div>
                 <p>You lose!</p> <p>Pokemon was {pokemon.name}! </p>
