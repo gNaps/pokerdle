@@ -182,13 +182,13 @@ const Hard = () => {
           {win && attempts < 6 && (
             <>
               <p>You won!</p>
-              <button
+              {/* <button
                 className="bg-violet-500 px-3 py-3 rounded-md 
             hover:bg-violet-700 active:bg-violet-700 text-slate-50 ml-2"
                 onClick={() => window.location.reload()}
               >
                 Play again
-              </button>
+              </button> */}
               <button
                 className="bg-violet-500 px-3 py-3 rounded-md 
             hover:bg-violet-700 active:bg-violet-700 text-slate-50 ml-2"
