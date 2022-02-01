@@ -198,7 +198,7 @@ const Hard = () => {
               </button>
             </>
           )}
-          {!win && attempts > 6 && (
+          {!win && attempts >= 6 && (
             <>
               <div>
                 <p>You lose!</p> <p>Pokemon was {pokemon.name}! </p>
