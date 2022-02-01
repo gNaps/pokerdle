@@ -1,3 +1,4 @@
+import axios from "axios";
 import { RiEmotionUnhappyLine } from "react-icons/ri";
 import {
   PokemonChoosen,
@@ -61,7 +62,6 @@ export const getResult = (
     evoChain: pokemonToGuess.evoChain === pokemonChoosen.evoChain,
   };
 
-  console.log("Result", result);
   return result;
 };
 
@@ -80,7 +80,52 @@ export const getTextResult = (result: PokemonResult[]) => {
 };
 
 export const firstLetterCapitalize = (name: string) => {
-  return (
-    name.substring(0, 1).toUpperCase() + name.substring(1, name.length)
-  );
+  return name.substring(0, 1).toUpperCase() + name.substring(1, name.length);
+};
+
+export const getDataPokemonByName = async (p: string) => {
+  const index = getNumberPokedex(p);
+
+  if (index > 0) {
+    const pokemon_res = await axios.get(
+      "https://pokeapi.co/api/v2/pokemon/" + index
+    );
+    const { id, name, types } = pokemon_res.data;
+    const typesFlat = types.map((t: any) => t.type.name);
+    const species_res = await axios.get(
+      "https://pokeapi.co/api/v2/pokemon-species/" + id
+    );
+    const { evolution_chain } = species_res.data;
+    const evolution_chain_res = await axios.get(evolution_chain.url);
+    const evolution_chain_data = evolution_chain_res.data;
+    let evo: any[] = [evolution_chain_data.chain.species.name];
+    if (
+      evolution_chain_data.chain.evolves_to &&
+      evolution_chain_data.chain.evolves_to.length > 0
+    ) {
+      evo = [...evo, evolution_chain_data.chain.evolves_to[0].species.name];
+      if (
+        evolution_chain_data.chain.evolves_to[0].evolves_to &&
+        evolution_chain_data.chain.evolves_to[0].evolves_to.length > 0
+      ) {
+        evo = [
+          ...evo,
+          evolution_chain_data.chain.evolves_to[0].evolves_to[0].species.name,
+        ];
+      }
+    }
+
+    const pokemonChoosen: PokemonChoosen = {
+      id: id,
+      name: name,
+      firstType: typesFlat[0],
+      secondType: typesFlat.length > 1 ? typesFlat[1] : "",
+      generation: getGenerationById(id),
+      evoChain: evo.findIndex((e) => e === name) + 1,
+    };
+
+    return pokemonChoosen;
+  } else {
+    return undefined;
+  }
 };

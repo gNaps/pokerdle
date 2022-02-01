@@ -24,6 +24,33 @@ a {
   box-sizing: border-box;
 }
 
+.bg-home {
+  background-image: url("../public/home-bg.png");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.bg-classic {
+  background-image: url("../public/classic-bg.png");
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.bg-hard {
+  background-image: url("../public/hard-bg.png");
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.button {
+  min-width: 150px;
+}
+
 .pokemon-list-element:hover {
   background-color: rgb(243 244 246);
 }
