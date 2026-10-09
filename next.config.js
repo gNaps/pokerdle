@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  images: {
-    domains: ["raw.githubusercontent.com"],
+  poweredByHeader: false,
+  async redirects() {
+    return [{ source: '/hard', destination: '/training', permanent: true }];
   },
 };
 
